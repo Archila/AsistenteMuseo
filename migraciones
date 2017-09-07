@@ -1,0 +1,106 @@
+migraciones
+
+$table->increments('id');
+$table->string('historia',800);
+$table->string('multimedia',500);
+$table->string('epoca',50);
+$table->integer('pieza')->unsigned();
+$table->foreign('pieza')->references('cod_pieza')->on('piezas');
+$table->timestamps();
+
+$table->increments('id');
+			$table->string('historia',800);
+			$table->string('multimedia',500);
+			$table->string('epoca',50);
+			$table->integer('pieza')->unsigned();
+			$table->foreign('pieza')->references('cod_pieza')->on('piezas');
+			$table->timestamps();
+
+$table->string('cod_pieza')->unique();
+			$table->string('nombre',250);
+			$table->boolean('activo')->default(true);
+			$table->string('codigo_qr',250)->nullable();
+			$table->string('fotografia',250)->nullable();
+			$table->integer('id_tipopieza')->unsigned();
+			$table->foreign('id_tipopieza')->references('id_tipo')->on('tipo_piezas');
+			$table->timestamps();
+
+$table->increments('id_tipo');
+            $table->string('nombre',150);
+            $table->timestamps();
+
+
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class Piezas extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('piezas', function (Blueprint $table) {
+            $table->string('cod_pieza')->unique();
+            $table->string('nombre',250);
+            $table->boolean('activo')->default(true);
+            $table->string('codigo_qr',250)->nullable();
+            $table->string('fotografia',250)->nullable();
+            $table->integer('id_tipopieza')->unsigned();
+            $table->foreign('id_tipopieza')->references('id_tipo')->on('tipo_piezas');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('piezas');
+    }
+}
+
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateFichasInformativasTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('fichas_informativas', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('historia',800);
+            $table->string('multimedia',500);
+            $table->string('epoca',50);
+            $table->integer('idpieza')->unsigned();
+            $table->foreign('idpieza')->references('cod_pieza')->on('piezas');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('fichas_informativas');
+    }
+}
