@@ -6,38 +6,33 @@
 
 @section('contenido')
 <div class="row"> 
+<div class=" col s12 m12 l6">
+  <form>
+    <div class="input-field col s10">      
 
-<form>
-  <div class="input-field col s10">      
+      <div class="input-field">    
+      <select class="icons">
+        <option value="" disabled selected>Seleccione una Pieza</option>      
+        @foreach ($piezas as $p)
+          @if (is_null($p->codigo_qr))
+            @if(!is_null($p->fotografia))
+              <option value="{{$p->cod_pieza}}" data-icon="{{$p->fotografia}}" class="circle">{{ $p->nombre }}</option>           
+            @else
+            <option value="{{$p->cod_pieza}}" data-icon="img_piezas/ferrocarril.jpg" class="circle">{{ $p->nombre }}</option>
+            @endif          
+          @endif    
+        @endforeach
+      </select>
+      
+      <label>Listado de piezas</label>
+      </div>
 
-    <div class="input-field col s10 l10">    
-    <select class="icons">
-      <option value="" disabled selected>Seleccione una Pieza</option>      
-      @foreach ($piezas as $p)
-        @if (is_null($p->codigo_qr))
-          <option value="{{$p->cod_pieza}}" data-icon="img_piezas/ferrocarril.jpg" class="circle">{{ $p->nombre }}</option>      
-        @endif    
-      @endforeach
-    </select>
-    <label>Listado de piezas</label>
     </div>
- 
-  </div>
-</form>
+  </form>
 </div>
-</br>
-<label>Browser Select</label>
-  <select class="browser-default">
-    <option value="" disabled selected>Choose your option</option>
-    <option value="1">Option 1</option>
-    @foreach ($piezas as $p)
-      @if (is_null($p->codigo_qr))
-        <option value="" >{{ $p->nombre }}</option>      
-        
-      @endif    
-    @endforeach
-    
-  </select>
+
+</div>
+
  
 
    
