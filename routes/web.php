@@ -19,9 +19,6 @@ Route::get('/', function () {
     return view('CodigoQR\QR');
 });
 */
-Route::get('/test', function(){
-	$piezas = App\piezas::all();
-	return $piezas;
-});
+Route::get('/test', 'QRController@listar');
 
 Route::get('/QR', 'QRController@generador');

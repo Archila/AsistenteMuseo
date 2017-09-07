@@ -27,6 +27,7 @@
     qrcode::png($contenido,$filename,$level,$tamanio,$framsize);          
   }
   else {echo '<p>Imagen existente en la base de datos</p>';}
+  echo '<p>'.$filename.'</p>';
 
   echo '<img src="'.$filename.'" />';
 
