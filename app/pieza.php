@@ -8,7 +8,12 @@ class pieza extends Model
 {
     //
     protected $table = 'piezas';
-    public $primaryKey = 'cod_pieza';
+    protected $primaryKey = 'cod_pieza';
     public $incrementing = false;
+
+    public function ficha()
+    {
+        return $this->hasOne('App\fichas_informativa','foreign_key');
+    }
 
 }

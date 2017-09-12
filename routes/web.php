@@ -15,10 +15,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/*Route::get('/QR', function () {
-    return view('CodigoQR\QR');
-});
-*/
-Route::get('/test', 'QRController@listar');
+Route::post('/r','QRController@guardarQR');
+Route::get('/r', function(){ return view('welcome');});
 
-Route::get('/QR', 'QRController@generador');
+Route::get('ficha/{id?}','QRController@ficha');
+
+Route::any('ficha','QRController@ficha');
+
+Route::match(array('GET', 'POST'),'/QR', 'QRController@listar');
+Route::match(array('GET', 'POST'),'/QR/generar', 'QRController@generarQR');
+Route::match(array('GET', 'POST'),'/QR/generar/{id?}', function ($id ) { return 'ID: '.$id;});
+Route::match(array('GET', 'POST'),'/QR/listar', function () { return "LISTAR"; });
+   
